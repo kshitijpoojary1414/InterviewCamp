@@ -1,13 +1,24 @@
-console.log(`  PASS  ./math-utils.test.js
-  PASS  ./arith.test.js
-  PASS  ./arith-params.test.js
-  PASS  ./arith-skip.test.js
-  PASS  ./string-utils.test.js
-  PASS  ./arith-mock.test.js
-  PASS  ./users.test.js
+class Solution :
+    def printCombos(self, arr, k):
+        buffer = [0] * k
+        self.result = []
+        self.printCombosHelper(arr, buffer, 0, 0, 1)
+        return self.result
 
-Test Suites: 7 passed, 7 total
-Tests:       2 skipped, 35 passed, 37 total
-Snapshots:   0 total
-Time:        5.19s
-Ran all test suites.`)
+
+    def printCombosHelper(self, arr, buffer, startIndex, bufferIndex, k):
+        if bufferIndex == len(buffer) or k <= 0:
+            return
+        if startIndex == len(arr):
+            return
+        self.result.append(buffer[:bufferIndex])
+
+        for i in range(startIndex, len(arr)):
+            print(i, bufferIndex, arr[i])
+            buffer[bufferIndex] = arr[i]
+
+            if arr[i] %2 != 0 :
+              k -= 1
+            self.printCombosHelper(arr, buffer, i + 1, bufferIndex + 1, k)
+
+print(Solution().printCombos([1,2,3,4],4))
